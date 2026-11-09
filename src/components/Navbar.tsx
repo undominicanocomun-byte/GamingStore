@@ -11,7 +11,10 @@ import {
   LogOut, 
   Menu, 
   X,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Scale,
+  Activity,
+  HelpCircle
 } from 'lucide-react';
 import { useStore, Currency } from '../context/StoreContext';
 
@@ -30,7 +33,9 @@ export const Navbar: React.FC = () => {
     currency,
     setCurrency,
     cartTotals,
-    formatPrice
+    formatPrice,
+    compareList,
+    setIsCompareOpen
   } = useStore();
 
   const [searchVal, setSearchVal] = useState(filters.search);
@@ -214,6 +219,20 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
+            {/* Hardware Compare Button */}
+            <button
+              onClick={() => setIsCompareOpen(true)}
+              className="relative p-2.5 text-slate-300 hover:text-cyan-400 rounded-lg hover:bg-slate-800/60 transition-colors"
+              title="Comparador de Hardware"
+            >
+              <Scale className={`w-5 h-5 ${compareList.length > 0 ? 'text-cyan-400' : ''}`} />
+              {compareList.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-cyan-500 text-black text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#090a0f] font-tech shadow-md shadow-cyan-900/50">
+                  {compareList.length}
+                </span>
+              )}
+            </button>
+
             {/* Cart Trigger */}
             <button
               onClick={() => setIsCartOpen(true)}
@@ -386,6 +405,47 @@ export const Navbar: React.FC = () => {
             }`}
           >
             LAPTOPS GAMING
+          </button>
+          
+          <button
+            onClick={() => {
+              setCurrentView('catalog');
+              setTimeout(() => {
+                const el = document.getElementById('benchmarks-lab');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className="px-3 py-1 rounded text-cyan-400 hover:text-white hover:bg-slate-800 transition-colors whitespace-nowrap flex items-center space-x-1"
+          >
+            <Activity className="w-3 h-3 text-cyan-400" />
+            <span>BENCHMARKS LAB</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setCurrentView('catalog');
+              setTimeout(() => {
+                const el = document.getElementById('setups-gallery');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className="px-3 py-1 rounded text-purple-400 hover:text-white hover:bg-slate-800 transition-colors whitespace-nowrap"
+          >
+            SETUPS PRO
+          </button>
+
+          <button
+            onClick={() => {
+              setCurrentView('catalog');
+              setTimeout(() => {
+                const el = document.getElementById('faq-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
+            className="px-3 py-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-colors whitespace-nowrap flex items-center space-x-1"
+          >
+            <HelpCircle className="w-3 h-3" />
+            <span>FAQ</span>
           </button>
         </div>
       </div>

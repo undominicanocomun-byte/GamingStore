@@ -15,6 +15,11 @@ import { CartDrawer } from './components/CartDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { Footer } from './components/Footer';
 import { FlashDealsSection } from './components/FlashDealsSection';
+import { BenchmarkLab } from './components/BenchmarkLab';
+import { BattleStationGallery } from './components/BattleStationGallery';
+import { FAQSection } from './components/FAQSection';
+import { ProductComparisonModal } from './components/ProductComparisonModal';
+import { LiveSocialProof } from './components/LiveSocialProof';
 import { 
   ArrowUpDown, 
   LayoutGrid, 
@@ -173,6 +178,22 @@ const MainStoreContent: React.FC = () => {
               </div>
 
             </div>
+
+            {/* Elite Gaming Sections: Benchmarks, Setups, and FAQ */}
+            {!filters.search && filters.category === 'all' && (
+              <>
+                <div id="benchmarks-lab">
+                  <BenchmarkLab />
+                </div>
+                <div id="setups-gallery">
+                  <BattleStationGallery />
+                </div>
+                <div id="faq-section">
+                  <FAQSection />
+                </div>
+              </>
+            )}
+
           </div>
         )}
 
@@ -193,8 +214,14 @@ const MainStoreContent: React.FC = () => {
       {/* Cart Drawer */}
       <CartDrawer />
 
+      {/* Hardware Comparison Drawer / Modal */}
+      <ProductComparisonModal />
+
       {/* Checkout & Official Invoice Modal */}
       <CheckoutModal />
+
+      {/* Real-time Non-intrusive Social Proof Ticker */}
+      <LiveSocialProof />
 
       {/* Main Footer */}
       <Footer />

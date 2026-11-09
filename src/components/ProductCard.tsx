@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, ShoppingCart, Heart, Eye, Check, AlertCircle } from 'lucide-react';
+import { Star, ShoppingCart, Heart, Eye, Check, AlertCircle, Scale } from 'lucide-react';
 import { Product } from '../types/index';
 import { useStore } from '../context/StoreContext';
 
@@ -13,8 +13,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     addToCart, 
     toggleWishlist, 
     isInWishlist, 
-    openProductDetail 
+    openProductDetail,
+    compareList,
+    addToCompare,
+    removeFromCompare
   } = useStore();
+
+  const isCompared = compareList.includes(product.id);
 
   const isFavorited = isInWishlist(product.id);
   const discountPercent = product.originalPrice 
@@ -79,6 +84,26 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             title={isFavorited ? 'Quitar de lista de deseos' : 'Guardar en lista de deseos'}
           >
             <Heart className={`w-4 h-4 ${isFavorited ? 'fill-current' : ''}`} />
+          </button>
+
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (isCompared) {
+                removeFromCompare(product.id);
+              } else {
+                addToCompare(product.id);
+              }
+            }}
+            className={`p-2 rounded-lg backdrop-blur-md transition-colors ${
+              isCompared
+                ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-950/50'
+                : 'bg-slate-900/80 text-slate-300 hover:text-cyan-400 hover:bg-slate-800'
+            }`}
+            title={isCompared ? 'Quitar del comparador' : 'Comparar especificaciones'}
+          >
+            <Scale className="w-4 h-4" />
           </button>
 
           <button
