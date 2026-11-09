@@ -1,0 +1,6 @@
+{
+  "name": "NEXUS GAMING - Tienda Gamer Profesional",
+  "description": "Tienda digital de hardware, periféricos gaming de alto rendimiento, PCs personalizadas y componentes de última generación.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
